@@ -9,7 +9,8 @@ void main() {
   const MethodChannel channel = MethodChannel('draw_stream');
 
   setUp(() {
-    TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger.setMockMethodCallHandler(
+    TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
+        .setMockMethodCallHandler(
       channel,
       (MethodCall methodCall) async {
         return '42';
@@ -18,10 +19,23 @@ void main() {
   });
 
   tearDown(() {
-    TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger.setMockMethodCallHandler(channel, null);
+    TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
+        .setMockMethodCallHandler(channel, null);
   });
 
   test('getPlatformVersion', () async {
     expect(await platform.getPlatformVersion(), '42');
+  });
+
+  test('startDrawStream', () async {
+    await platform.startDrawStream(
+      videoPath: 'videoPath',
+      outputPath: 'outputPath',
+      drawingDataList: [],
+    );
+  });
+
+  test('stopDrawStream', () async {
+    await platform.stopDrawStream();
   });
 }
