@@ -1,3 +1,4 @@
+import 'package:draw_stream/drawing_data.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 
@@ -11,7 +12,29 @@ class MethodChannelDrawStream extends DrawStreamPlatform {
 
   @override
   Future<String?> getPlatformVersion() async {
-    final version = await methodChannel.invokeMethod<String>('getPlatformVersion');
+    final version =
+        await methodChannel.invokeMethod<String>('getPlatformVersion');
     return version;
+  }
+
+  @override
+  Future<void> startDrawStream({
+    required String videoPath,
+    required String outputPath,
+    required List<DrawingData> drawingDataList,
+  }) async {
+    await methodChannel.invokeMethod<void>(
+      'startDrawStream',
+      {
+        'videoPath': videoPath,
+        'outputPath': outputPath,
+        'drawingDataList': drawingDataList.map((e) => e.toJson()).toList(),
+      },
+    );
+  }
+
+  @override
+  Future<void> stopDrawStream() async {
+    await methodChannel.invokeMethod<void>('stopDrawStream');
   }
 }

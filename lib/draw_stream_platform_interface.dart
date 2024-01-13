@@ -1,3 +1,4 @@
+import 'package:draw_stream/drawing_data.dart';
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
 import 'draw_stream_method_channel.dart';
@@ -25,5 +26,17 @@ abstract class DrawStreamPlatform extends PlatformInterface {
 
   Future<String?> getPlatformVersion() {
     throw UnimplementedError('platformVersion() has not been implemented.');
+  }
+
+  Future<void> startDrawStream({
+    required String videoPath,
+    required String outputPath,
+    required List<DrawingData> drawingDataList,
+  }) {
+    throw UnimplementedError('startDrawStream() has not been implemented.');
+  }
+
+  Future<void> stopDrawStream() {
+    throw UnimplementedError('stopDrawStream() has not been implemented.');
   }
 }

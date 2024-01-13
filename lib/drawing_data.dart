@@ -9,6 +9,13 @@ class DrawingData {
     required this.lines,
     required this.circles,
   });
+
+  Map<String, dynamic> toJson() {
+    return {
+      'lines': lines.map((e) => e.toJson()).toList(),
+      'circles': circles.map((e) => e.toJson()).toList(),
+    };
+  }
 }
 
 class CircleData {
@@ -23,6 +30,18 @@ class CircleData {
     required this.color,
     required this.strokeWidth,
   });
+
+  Map<String, dynamic> toJson() {
+    return {
+      'center': {
+        'dx': center.dx,
+        'dy': center.dy,
+      },
+      'radius': radius,
+      'color': color.value,
+      'strokeWidth': strokeWidth,
+    };
+  }
 }
 
 class LineData {
@@ -37,4 +56,19 @@ class LineData {
     required this.color,
     required this.strokeWidth,
   });
+
+  Map<String, dynamic> toJson() {
+    return {
+      'start': {
+        'dx': start.dx,
+        'dy': start.dy,
+      },
+      'end': {
+        'dx': end.dx,
+        'dy': end.dy,
+      },
+      'color': color.value,
+      'strokeWidth': strokeWidth,
+    };
+  }
 }
